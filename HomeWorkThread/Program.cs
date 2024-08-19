@@ -5,8 +5,36 @@ namespace HomeWorkThread
 {
 	public class Program
 	{
+		public static void PrintHello()
+		{
+			Console.WriteLine("Привет из потока!");
+		}
+
+		public static void PrintParametr(object message)
+		{
+			Console.WriteLine($"Сообщение из потока: {message}");
+		}
 		static void Main(string[] args)
 		{
+			// Создаем новый поток
+			Thread thread3 = new Thread(PrintHello);
+
+			// Запускаем поток
+			thread3.Start();
+
+			// Основной поток продолжает работу
+			Console.WriteLine("Привет из основного потока!");
+
+			///////////////////////////////////////////////////////////////
+			///
+			// Создаем новый поток, передавая сообщение "Привет!"
+			Thread thread4 = new Thread(PrintParametr);
+			thread4.Start("Привет!");
+
+			// Создаем еще один поток, передавая сообщение "Как дела?"
+			Thread thread5 = new Thread(PrintParametr);
+			thread5.Start("Как дела?");
+
 			// Создаем два потока
 			/*var thread1 = new Thread(() =>
 			{
@@ -42,6 +70,9 @@ namespace HomeWorkThread
 
 			Console.WriteLine("\nПотоки завершены.");
 			Console.WriteLine();*/
+
+
+
 
 			var shop = new Shop();
 			var random = new Random();
@@ -80,4 +111,4 @@ namespace HomeWorkThread
 		}
 
 	}
-	}
+}
